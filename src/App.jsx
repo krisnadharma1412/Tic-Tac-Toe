@@ -10,7 +10,7 @@ export default function Board() {
   
   function handleClick(i) {
     const nextSquares = squares.slice();
-    console.log(nextSquares) ;
+    console.log(nextSquares);
   }
 
   return (
