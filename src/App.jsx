@@ -17,9 +17,12 @@ function Board({xIsNext, squares, onPlay}) {
 
   const winner = calculateWinner(squares);
   let status = '';
+  console.log(squares)
   if(winner) {
     status = 'Winner: ' + winner;
-  } else {
+  }else if(!squares.includes(null)) {
+    status = 'Game Over'
+  }else {
     status = 'Next player: ' + (xIsNext ? 'X' : 'O'); 
   }
 
@@ -42,21 +45,22 @@ function Board({xIsNext, squares, onPlay}) {
 }
 
 export default function Game() {
-  const [xIsNext, setXIsNext] = useState(true);
+  // const [xIsNext, setXIsNext] = useState(true);
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
+  const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
   function jumpTo(nextMove){
     setCurrentMove(nextMove);
-    setXIsNext(nextMove % 2 === 0);
+    // setXIsNext(nextMove % 2 === 0);
   }
 
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1)
-    setXIsNext(!xIsNext);
+    // setXIsNext(!xIsNext);
   }
 
   const moves = history.map((squares, move) => {
@@ -90,6 +94,7 @@ export default function Game() {
 }
 
 function calculateWinner(squares) {
+  // Possibles win conditions
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
