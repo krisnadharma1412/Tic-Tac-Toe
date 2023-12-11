@@ -21,7 +21,7 @@ function Board({xIsNext, squares, onPlay}) {
   if(winner) {
     status = 'Winner: ' + winner;
   }else if(!squares.includes(null)) {
-    status = 'Game Over'
+    status = 'Game Over, it is a tie';
   }else {
     status = 'Next player: ' + (xIsNext ? 'X' : 'O'); 
   }
